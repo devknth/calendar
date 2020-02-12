@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { Calendar, Home, About, Posts } from 'pages'
+import Menu from 'components/Menu'
+import { createGlobalStyle } from 'styled-components'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id='container'>
+      <GlobalStyle />
+      <Menu />
+      <Switch>
+        <Route exact path='/' component={Calendar} />
+      </Switch>
+      <Route path='/Home' component={Home} />
+      <Switch>
+        <Route path='/about/:name' component={About} />
+        <Route path='/about' component={About} />
+      </Switch>
+      <Route path='/posts' component={Posts} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 50px;
+    padding: 50px;
+    height: 100%;
+    background-color: white;
+    @import url('https://fonts.googleapis.com/earlyaccess/notosanskr.css');
+    font-family: "Noto Sans KR", sans-serif !important;
+  }
+`
